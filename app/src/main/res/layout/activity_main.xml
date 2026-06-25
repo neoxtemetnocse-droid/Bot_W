@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:padding="8dp"
+    tools:context=".MainActivity">
+
+    <!-- ScrollView principal con todos los controles -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/mainScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/terminalCard"
+        android:layout_marginBottom="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="4dp">
+
+            <!-- Título Principal -->
+            <TextView
+                android:id="@+id/tvAppTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="BOT NEO CONTROL PANEL"
+                android:textAlignment="center"
+                android:textColor="@color/primary"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Sección 6: Panel de Estado Real-Time -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardBackgroundColor="@color/surface"
+                app:cardCornerRadius="12dp"
+                app:strokeColor="#333333"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📊 PANEL DE ESTADO EN TIEMPO REAL"
+                        android:textColor="@color/primary"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:layout_marginBottom="8dp" />
+
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:columnCount="2"
+                        android:rowCount="3"
+                        android:useDefaultMargins="true">
+
+                        <TextView
+                            android:id="@+id/tvNodeStatus"
+                            android:layout_width="0dp"
+                            android:layout_columnWeight="1"
+                            android:text="Proceso Node: DETENIDO 🔴"
+                            android:textColor="@color/text_white"
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:id="@+id/tvWaStatus"
+                            android:layout_width="0dp"
+                            android:layout_columnWeight="1"
+                            android:text="Conexión WA: DESCONECTADO ❌"
+                            android:textColor="@color/text_white"
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:id="@+id/tvSessionFiles"
+                            android:layout_width="0dp"
+                            android:layout_columnWeight="1"
+                            android:text="Archivos sesión: 0 | 0 KB"
+                            android:textColor="@color/text_white"
+                            android:textSize="12sp"
+                            android:layout_marginTop="4dp"/>
+
+                        <TextView
+                            android:id="@+id/tvLastReset"
+                            android:layout_width="0dp"
+                            android:layout_columnWeight="1"
+                            android:text="Último reinicio: N/A"
+                            android:textColor="@color/text_white"
+                            android:textSize="12sp"
+                            android:layout_marginTop="4dp"/>
+
+                        <TextView
+                            android:id="@+id/tvBotUptime"
+                            android:layout_width="0dp"
+                            android:layout_columnWeight="1"
+                            android:text="Uptime bot: 00:00:00"
+                            android:textColor="@color/text_white"
+                            android:textSize="12sp"
+                            android:layout_marginTop="4dp"/>
+
+                        <TextView
+                            android:id="@+id/tvSessionRestarts"
+                            android:layout_width="0dp"
+                            android:layout_columnWeight="1"
+                            android:text="Reinicios en sesión: 0"
+                            android:textColor="@color/text_white"
+                            android:textSize="12sp"
+                            android:layout_marginTop="4dp"/>
+                    </GridLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Banner Amarillo de Advertencia (Sección 5) -->
+            <LinearLayout
+                android:id="@+id/llErrorBanner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/warning_yellow"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:layout_marginBottom="12dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvErrorBannerText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="⚠️ Advertencia: Error en la conexión detectado."
+                    android:textColor="#121212"
+                    android:textStyle="bold"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- Sección 4: Watchdog Automático -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardBackgroundColor="@color/surface"
+                app:cardCornerRadius="12dp"
+                app:strokeColor="#333333"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🐕 WATCHDOG AUTOMÁTICO"
+                        android:textColor="@color/primary"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:layout_marginBottom="4dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <com.google.android.material.materialswitch.MaterialSwitch
+                            android:id="@+id/swWatchdog"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/toggle_watchdog"
+                            android:textColor="@color/text_white"
+                            android:textSize="13sp" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_weight="1"/>
+
+                        <TextView
+                            android:id="@+id/tvWatchdogCounter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Reinicios: 0 / 5"
+                            android:textColor="@color/text_white"
+                            android:textStyle="bold"
+                            android:textSize="13sp"
+                            android:layout_marginEnd="8dp"/>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnResetCounter"
+                            style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:padding="4dp"
+                            app:iconGravity="textStart"
+                            app:iconSize="20dp"
+                            app:icon="@android:drawable/ic_menu_rotate"
+                            android:tooltipText="Resetear Contador" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Sección 1: Autenticación por Código de Emparejamiento -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardBackgroundColor="@color/surface"
+                app:cardCornerRadius="12dp"
+                app:strokeColor="#333333"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📲 VINCULACIÓN POR CÓDIGO (PAIRING CODE)"
+                        android:textColor="@color/primary"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:layout_marginBottom="8dp" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/text_gray"
+                        app:boxStrokeColor="@color/primary"
+                        app:boxStrokeWidth="1dp"
+                        app:hintTextColor="@color/primary"
+                        style="@style/Widget.Material3.TextInputLayout.FilledBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etPhoneNumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/phone_number_hint"
+                            android:textColor="@color/text_white"
+                            android:inputType="phone"
+                            android:background="#252525"
+                            android:textSize="14sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnRequestCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/btn_request_code"
+                        android:layout_marginTop="8dp"
+                        android:backgroundTint="@color/primary"
+                        android:textColor="#121212"
+                        android:textStyle="bold" />
+
+                    <!-- Contenedor del código de emparejamiento generado -->
+                    <LinearLayout
+                        android:id="@+id/llPairingCodeContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_marginTop="12dp"
+                        android:background="#202020"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:id="@+id/tvPairingCode"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/pairing_code_placeholder"
+                            android:textAlignment="center"
+                            android:textColor="@color/accent"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            android:fontFamily="monospace"
+                            android:letterSpacing="0.1" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnCopyCode"
+                            style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Copiar"
+                            android:textSize="11sp"
+                            android:textColor="@color/text_white" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Sección 2: Control Principal -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardBackgroundColor="@color/surface"
+                app:cardCornerRadius="12dp"
+                app:strokeColor="#333333"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🎮 CONTROLES PRINCIPALES"
+                        android:textColor="@color/primary"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:layout_marginBottom="8dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnStartBot"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/btn_start_bot"
+                            android:layout_marginEnd="4dp"
+                            android:backgroundTint="@color/primary"
+                            android:textColor="#121212"
+                            android:textStyle="bold" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnStopBot"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/btn_stop_bot"
+                            android:layout_marginStart="4dp"
+                            android:backgroundTint="@color/status_red"
+                            android:textColor="@color/text_white"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColorHint="@color/text_gray"
+                        app:boxStrokeColor="@color/primary"
+                        app:boxStrokeWidth="1dp"
+                        style="@style/Widget.Material3.TextInputLayout.FilledBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etDownloadUrl"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="URL de index.js"
+                            android:textColor="@color/text_white"
+                            android:background="#252525"
+                            android:textSize="13sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnUpdateIndex"
+                            style="@style/Widget.Material3.Button.TonalButton"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="4dp"
+                            android:text="@string/btn_update_index"
+                            android:textSize="11sp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnExportLogs"
+                            style="@style/Widget.Material3.Button.TonalButton"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="4dp"
+                            android:text="@string/btn_export_logs"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Sección 3: Sesiones y Procesos Advanced -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardBackgroundColor="@color/surface"
+                app:cardCornerRadius="12dp"
+                app:strokeColor="#333333"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🛡️ ADMINISTRACIÓN DE SESIONES Y PROCESOS"
+                        android:textColor="@color/primary"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:layout_marginBottom="8dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnKillAll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/btn_kill_all"
+                        android:backgroundTint="@color/status_red"
+                        android:textColor="@color/text_white"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="4dp"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnConfirmLogout"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/btn_logout_wa"
+                        android:textColor="@color/error_red"
+                        android:layout_marginBottom="4dp"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCleanGhost"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/btn_clean_ghost"
+                        android:layout_marginBottom="4dp"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCleanRestart"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/btn_clean_restart"
+                        android:layout_marginBottom="4dp"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnDeauthReconnect"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/btn_deauth_reconnect" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Sección 7: Logs en Tiempo Real (Fijo Abajo, Terminal style) -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/terminalCard"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        app:cardBackgroundColor="@color/terminal_bg"
+        app:cardCornerRadius="8dp"
+        app:strokeColor="@color/primary"
+        app:strokeWidth="1dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="6dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="💻 CONSOLA DE LOGS EN TIEMPO REAL"
+                android:textColor="@color/primary"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="4dp"/>
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/svLogs"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tvLogs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:text=""
+                    android:textColor="@color/text_white"
+                    android:textSize="11sp" />
+            </androidx.core.widget.NestedScrollView>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

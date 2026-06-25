@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Bot NEO Panel</string>
+    <string name="pairing_code_placeholder">ABCD - 1234</string>
+    <string name="phone_number_hint">Número internacional (ej: 5213323332857)</string>
+    <string name="btn_request_code">📲 SOLICITAR CÓDIGO</string>
+    <string name="btn_copy_code">📋 COPIAR CÓDIGO</string>
+    <string name="btn_start_bot">▶ INICIAR BOT</string>
+    <string name="btn_stop_bot">⏹ DETENER BOT</string>
+    <string name="btn_update_index">⬇ ACTUALIZAR INDEX</string>
+    <string name="btn_export_logs">📤 EXPORTAR LOGS</string>
+    <string name="btn_kill_all">🔴 MATAR TODO</string>
+    <string name="btn_logout_wa">🗂 CERRAR SESIÓN WA</string>
+    <string name="btn_clean_ghost">🧹 LIMPIAR SESIONES FANTASMA</string>
+    <string name="btn_clean_restart">🔄 REINICIAR LIMPIO</string>
+    <string name="btn_deauth_reconnect">🔁 DEAUTENTICAR Y RECONECTAR</string>
+    <string name="toggle_watchdog">🐕 Watchdog ON/OFF</string>
+    <string name="btn_reset_counter">🔢 RESETEAR CONTADOR</string>
+</resources>

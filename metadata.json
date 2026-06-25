@@ -1,0 +1,6 @@
+{
+  "name": "Bot NEO Panel",
+  "description": "Panel de control para bot de WhatsApp Baileys con Node.js y autenticación por código de emparejamiento (pairing code)",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

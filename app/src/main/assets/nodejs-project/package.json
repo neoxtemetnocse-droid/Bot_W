@@ -1,0 +1,10 @@
+{
+  "name": "whatsapp-bot-neo",
+  "version": "1.0.0",
+  "description": "WhatsApp Bot for Neo Panel",
+  "main": "index.js",
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.6.0",
+    "pino": "^8.19.0"
+  }
+}
